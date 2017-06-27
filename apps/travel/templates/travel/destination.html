@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Destinations</title>
+</head>
+<body>
+	<header>
+		<a href="{% url 'travel:travel_dashboard' %}"></a>
+		<a href="{% url 'login:logout' %}">Logout</a>
+	</header>
+	<main>
+		<h1>{{ plan.destination }}</h1>
+		<h3>Planned by: {{ plan.user_name }}</h3>
+		<h3>Description: {{ plan.description }}</h3>
+		<h3>Travel Date From: {{ plan.start_date }}</h3>
+		<h3>Travel Date To: {{ plan.end_date }}</h3>
+		<br>
+		<h1>Other users' joing the trip:</h1>
+		{% for user_name in plans %}
+			{% if plan.user_name != request.session.login_id %}	
+				<h3>{{ plan.user_name }}</h3>
+			{% endif %}
+		{% endfor %}
+	</main>
+
+</body>
+</html>

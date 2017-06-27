@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Travel Dashboard</title>
+</head>
+<body>
+	<header>
+		<a href="{% url 'login:logout' %}">Logout</a>
+		<h1>Hello, {{ request.session.user_name }}!</h1>
+	</header>
+	<table>
+		<caption>Your Trip Schedules</caption>
+		<thead>
+			<tr>
+				<th>Destination</th>
+				<th>Travel Start Date</th>
+				<th>Travel End Date</th>
+				<th>Plan</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for plan in plans %}
+				<tr>
+					<td>{{ plan.travel_destination }}</td>
+					<td>{{ plan.start_date }}</td>
+					<td>{{ plan.end_date }}</td>
+					<td>{{ plan.description }}</td>
+				</tr>
+			{% endfor %}			
+		</tbody>			
+	</table>
+	
+		<table>
+			<caption>Other User's Travel Plans</caption>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Destination</th>
+					<th>Travel Start Date</th>
+					<th>Travel End Date</th>
+					<th>Do you want to join?</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for plan in plans %}
+					<tr>
+						<td>{{ plan.user_name }}</td>
+						<td>{{ plan.destination }}</td>
+						<td>{{ plan.start_date }}</td>
+						<td>{{ plan.end_date }}</td>
+						<td><a href="{% url 'travel/addTrip.html' %}"></a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{% url 'travel:add_trip' %}">Add Travel Plan</a>
+	</body>
+</html>
